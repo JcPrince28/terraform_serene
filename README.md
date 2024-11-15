@@ -58,15 +58,16 @@ Some components were manually configured outside Terraform due to constraints:
 
 ## **File Structure**
 
-.
-├── main.tf                        # Main Terraform configuration file
-├── variables.tf                   # Variable definitions for Terraform
-├── variables.tfvars               # Variable values for sensitive or environment-specific data
-├── outputs.tf                     # Output definitions for Terraform
-├── .gitignore                     # Git ignore file to exclude sensitive and generated files
-├── README.md                      # Project documentation
-└── wordpress-architecture-diagram.png # AWS Infrastructure network diagram
-
+```
+terraform_serene/
+├── main.tf                         # Main Terraform configuration file
+├── outputs.tf                      # Output variables from Terraform configuration
+├── terraform.tfvars                # Contains sensitive variables and secrets
+├── variables.tf                    # Definitions of variable types
+├── .gitignore                      # Git ignore rules to exclude files like state and sensitive data
+├── README.md                       # Project documentation
+└── wordpress-architecture-diagram.png  # Diagram of the architecture (link it below in README)
+```
 
 ## Deployment Steps
 
