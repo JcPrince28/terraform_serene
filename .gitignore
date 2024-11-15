@@ -1,6 +1,6 @@
 variables.tfvars
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
 *.pem
 .terraform.lock.hcl
 .terraform/*
