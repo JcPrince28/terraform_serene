@@ -2,7 +2,7 @@
 
 ## **Overview**
 
-This project automates the deployment of a highly available WordPress website infrastructure for **Serene Laser Studio**, a company specializing in diode laser hair removal. The infrastructure is deployed on **AWS** using **Terraform**, leveraging a **golden AMI**, **VPC** networking, and an **Application Load Balancer (ALB)** to provide scalability and reliability.
+This project automates the deployment of a highly available WordPress website infrastructure for **Serene Laser Studio** (https://serene-laserstudio.com), a company specializing in diode laser hair removal. The infrastructure is deployed on **AWS** using **Terraform**, leveraging a **golden AMI**, **VPC** networking, and an **Application Load Balancer (ALB)** to provide scalability and reliability.
 
 ---
 
