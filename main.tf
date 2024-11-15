@@ -133,7 +133,7 @@ data "aws_ami" "wordpress" {
 
   filter {
     name   = "name"
-    values = ["bitnami-wordpresspro-6.6.2-5-r05-linux-debian-12-x86_64-hvm-ebs-nami"]
+    values = ["serene_wp_image"] # AMI with configured WordPress
   }
 
   filter {
@@ -141,7 +141,7 @@ data "aws_ami" "wordpress" {
     values = ["hvm"]
   }
 
-  owners = ["979382823631"]
+  owners = [var.aws_account_id]
 }
 
 # code to generate RSA key using the  TLS provider
@@ -178,6 +178,13 @@ resource "aws_security_group" "alb-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "ALB Security Group"
   }
@@ -198,6 +205,14 @@ resource "aws_security_group" "webserver" {
     cidr_blocks = ["0.0.0.0/0"]
     #security_groups = [aws_security_group.alb.id]
   }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "Webserver Security Group"
   }

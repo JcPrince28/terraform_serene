@@ -34,3 +34,6 @@ variable "certificate_arn" {
   type = string
 }
 
+variable "aws_account_id" {
+  type = string
+}
