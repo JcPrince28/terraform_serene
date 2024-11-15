@@ -73,10 +73,10 @@ terraform_serene/
 
 1. **Clone the Repository**
     ```bash
-    git clone <your-repository-url>
-    cd <your-repository-folder>
+    git clone https://github.com/JcPrince28/terraform_serene.git
+    cd terraform_serene
     ```
-
+	
 2. **Install Terraform**
     Ensure Terraform is installed and available in your system's PATH.
     [Download Terraform](https://www.terraform.io/downloads)
