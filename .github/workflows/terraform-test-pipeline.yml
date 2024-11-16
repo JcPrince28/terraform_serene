@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: checkout repository
-        uses: actions/checkout
+        uses: actions/checkout@v3
       - name: setup terraform
-        uses: hashicorp/setup-terraform
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
       - name: terraform init
