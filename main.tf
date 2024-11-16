@@ -298,31 +298,3 @@ resource "aws_lb_target_group_attachment" "alb_attachment" {
   target_id        = aws_instance.web_server[count.index].id
   port             = 80
 }
-
-# import public dns zone from Route53 and set alb as alias
-resource "aws_route53_zone" "public_zone" {
-  name = "serene-laserstudio.com"
-}
-
-import {
-  to = aws_route53_zone.public_zone
-  id = var.public_zone_id
-}
-
-# import dns record from Route53
-resource "aws_route53_record" "dns_record" {
-  zone_id = aws_route53_zone.public_zone.zone_id
-  name    = "serene-laserstudio.com"
-  type    = "A"
-
-  alias {
-    name                   = aws_lb.alb.dns_name
-    zone_id                = aws_lb.alb.zone_id
-    evaluate_target_health = false
-  }
-}
-
-import {
-  to = aws_route53_record.dns_record
-  id = "${var.public_zone_id}_serene-laserstudio.com_A"
-}
