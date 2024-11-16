@@ -33,7 +33,6 @@ Some components were manually configured outside Terraform due to constraints:
 1. **Route 53**:
    - Domain registration.
    - Hosted Zone setup.
-   - A record pointing to the ALB alias.
 2. **ACM**:
    - Certificate issuance for the domain using AWS Certificate Manager (ACM).
 
@@ -87,11 +86,13 @@ terraform_serene/
     aws configure
     ```
 
-4. **Customize Variables (optional)**
-    You may customize some of the variable values by creating/modifying the `terraform.tfvars` file. Specifically, ensure that:
+4. **Customize Variables**
+    Declare variable values by creating/modifying the `terraform.tfvars` file. Specifically, ensure that:
     - `aws_region` is set to your desired AWS region.
     - `vpc_cidr`, `private_cidr`, and `public_cidr` match your network configuration.
     - `certificate_arn` is set to the ARN of the ACM certificate you created.
+	- `aws_account_id`
+	- `public_zone_id`
 	
 5. **Access the Webserver**
     - The EC2 instances will be deployed in private subnets without public IP addresses.
