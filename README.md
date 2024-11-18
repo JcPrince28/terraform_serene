@@ -96,7 +96,7 @@ terraform_serene/
 	- `public_zone_id`
 	
 5. **Access the Webserver**
-    - The EC2 instances will be deployed in private subnets without public IP addresses.
+    - The EC2 instances will be deployed in private subnets without public IP addresses but connected to a NAT gateway for outbound internet access.
     - You can connect to the EC2 instances using SSH via a bastion host or VPN, if configured.
 
 ## Additional Information
