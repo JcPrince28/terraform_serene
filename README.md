@@ -6,6 +6,13 @@ This project automates the deployment of a highly available WordPress website in
 
 ---
 
+## **Infrastructure Diagram**
+
+![Infrastructure Diagram](./wordpress-architecture-diagram.png)
+
+
+---
+
 ## **Features**
 
 - **Custom VPC Setup**: Includes public and private subnets in two availability zones.
@@ -35,12 +42,6 @@ Some components were manually configured outside Terraform due to constraints:
    - Hosted Zone setup.
 2. **ACM**:
    - Certificate issuance for the domain using AWS Certificate Manager (ACM).
-
----
-
-## **Infrastructure Diagram**
-
-![Infrastructure Diagram](./wordpress-architecture-diagram.png)
 
 ---
 
