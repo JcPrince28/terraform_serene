@@ -1,21 +1,67 @@
 name: Terraform Test Deployment
-on: [push, workflow_dispatch]
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - '**/*.tf'
+  workflow_dispatch:
+
 jobs:
   terraform-validation:
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: setup terraform
+
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
-      - name: terraform init
+
+      - name: Terraform Init
         run: terraform init
-      - name: terraform validate
+
+      - name: Terraform Validate
         run: terraform validate
 
+  terraform-apply-destroy:
+    needs: terraform-validation
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+      TF_VAR_vpc_cidr: ${{ secrets.VPC_CIDR }}
+      TF_VAR_subnet_cidr: ${{ secrets.SUBNET_CIDR }}
+      TF_VAR_public_cidr: ${{ secrets.PUBLIC_CIDR }}
+      TF_VAR_public_cidr2: ${{ secrets.PUBLIC_CIDR2 }}
+      TF_VAR_private_cidr: ${{ secrets.PRIVATE_CIDR }}
+      TF_VAR_private_cidr2: ${{ secrets.PRIVATE_CIDR2 }}
+      TF_VAR_vpc_name: ${{ secrets.VPC_NAME }}
+      TF_VAR_certificate_arn: ${{ secrets.CERTIFICATE_ARN }}
+      TF_VAR_aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+      TF_VAR_public_zone_id: ${{ secrets.PUBLIC_ZONE_ID }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
 
+      - name: Terraform Init
+        run: terraform init
 
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
+      - name: Remove DNS Record Zone from state file
+        run: |
+          terraform state rm aws_route53_zone.public_zone
+          terraform state rm aws_route53_record.dns_record
+      
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
