@@ -29,10 +29,21 @@ jobs:
   terraform-apply:
     needs: terraform-validation
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    #timeout-minutes: 15
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+      TF_VAR_vpc_cidr: ${{ secrets.VPC_CIDR }}
+      TF_VAR_subnet_cidr: ${{ secrets.SUBNET_CIDR }}
+      TF_VAR_public_cidr: ${{ secrets.PUBLIC_CIDR }}
+      TF_VAR_public_cidr2: ${{ secrets.PUBLIC_CIDR2 }}
+      TF_VAR_private_cidr: ${{ secrets.PRIVATE_CIDR }}
+      TF_VAR_private_cidr2: ${{ secrets.PRIVATE_CIDR2 }}
+      TF_VAR_vpc_name: ${{ secrets.VPC_NAME }}
+      TF_VAR_certificate_arn: ${{ secrets.CERTIFICATE_ARN }}
+      TF_VAR_aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+      TF_VAR_public_zone_id: ${{ secrets.PUBLIC_ZONE_ID }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -46,4 +57,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -parallelism=1
+        run: terraform apply -auto-approve
