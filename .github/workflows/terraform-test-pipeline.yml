@@ -1,21 +1,51 @@
 name: Terraform Test Deployment
-on: [push, workflow_dispatch]
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - '**/*.tf'
+  workflow_dispatch:
+
 jobs:
   terraform-validation:
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: setup terraform
+
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
-      - name: terraform init
+
+      - name: Terraform Init
         run: terraform init
-      - name: terraform validate
+
+      - name: Terraform Validate
         run: terraform validate
 
+  terraform-apply:
+    needs: terraform-validation
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
 
+      - name: Terraform Init
+        run: terraform init
 
+      - name: Terraform Plan
+        run: terraform plan
 
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
