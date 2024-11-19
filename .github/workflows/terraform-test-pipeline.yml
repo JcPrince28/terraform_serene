@@ -26,7 +26,7 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-  terraform-apply:
+  terraform-apply-destroy:
     needs: terraform-validation
     runs-on: ubuntu-latest
     env:
@@ -57,6 +57,11 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+      - name: Remove DNS Record Zone from state file
+        run: |
+          terraform state rm aws_route53_zone.public_zone
+          terraform state rm aws_route53_record.dns_record
       
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
