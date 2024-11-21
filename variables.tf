@@ -31,16 +31,16 @@ variable "private_cidr2" {
 }
 
 variable "certificate_arn" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "aws_account_id" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "public_zone_id" {
-  type = string
+  type      = string
   sensitive = true
 }
