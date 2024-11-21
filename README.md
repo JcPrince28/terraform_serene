@@ -92,8 +92,8 @@ terraform_serene/
     - `aws_region` is set to your desired AWS region.
     - `vpc_cidr`, `private_cidr`, and `public_cidr` match your network configuration.
     - `certificate_arn` is set to the ARN of the ACM certificate you created.
-	- `aws_account_id`
-	- `public_zone_id`
+	- `aws_account_id` for Wordpress AMI lookup.
+	- `public_zone_id` Your Route53 public hosted zone ID.
 	
 5. **Access the Webserver**
     - The EC2 instances will be deployed in private subnets without public IP addresses but connected to a NAT gateway for outbound internet access.
