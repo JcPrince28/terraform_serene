@@ -105,7 +105,7 @@ terraform_serene/
 
 ## **GitHub Actions Workflow Secrets Configuration**
 
-To deploy your Terraform infrastructure to AWS using GitHub Actions, you'll need to configure the following secrets in your GitHub repository:
+To test your Terraform infrastructure changes and validate the deployment to AWS using GitHub Actions, you'll need to configure the following secrets in your GitHub repository. This configuration will ensure the workflow can authenticate with AWS, apply the changes, and validate the infrastructure. This is part of the continuous integration and continuous deployment (CI/CD) pipeline, where changes pushed to the repository are automatically tested and deployed to AWS.
 
 ### **Required Secrets**
 You can configure these secrets in the GitHub repository by going to **Settings > Secrets and Variables > Actions**.

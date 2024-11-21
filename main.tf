@@ -133,7 +133,7 @@ data "aws_ami" "wordpress" {
 
   filter {
     name   = "name"
-    values = ["serene_wp_image"] # AMI with configured WordPress
+    values = ["dev_serene_wp_image"] # AMI with configured WordPress
   }
 
   filter {
@@ -312,7 +312,7 @@ import {
 # import dns record from Route53
 resource "aws_route53_record" "dns_record" {
   zone_id = aws_route53_zone.public_zone.zone_id
-  name    = "serene-laserstudio.com"
+  name    = "dev.serene-laserstudio.com"
   type    = "A"
 
   alias {
@@ -324,5 +324,5 @@ resource "aws_route53_record" "dns_record" {
 
 import {
   to = aws_route53_record.dns_record
-  id = "${var.public_zone_id}_serene-laserstudio.com_A"
+  id = "${var.public_zone_id}_dev.serene-laserstudio.com_A"
 }
